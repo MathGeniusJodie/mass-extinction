@@ -2,7 +2,7 @@
 	"name": "mass-extinction",
 	"version": "0.0.2",
 	"description": "minimal, modular, CSS reset for tailwind",
-	"repository": "",
+	"repository": "https://github.com/MathGeniusJodie/mass-extinction",
 	"main": "index.js",
 	"scripts": {
 		"build": "node build.js"

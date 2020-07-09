@@ -1,6 +1,8 @@
 # Mass Extinction
 
 a minimal, modular, CSS reset for tailwind
+<https://github.com/MathGeniusJodie/mass-extinction>
+<https://www.npmjs.com/package/mass-extinction>
 
 output of the default config
 
