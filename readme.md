@@ -1,24 +1,44 @@
 # Mass Extinction
 
-a minimal, modular, CSS reset for tailwind
+a minimal, customizable, CSS reset for tailwind
 
 <https://github.com/MathGeniusJodie/mass-extinction>
 
 <https://www.npmjs.com/package/mass-extinction>
 
-output of the default config
+## Breaking Changes Planned for Version 1
+
+#### margin reset only for body
+
+Removed because it breaks `<dialog>` and because margins are usually explicitly set on elements that have a default margin. Since almost every website removes margin on `<body>` and the tailwind class `m-0` is rarely used, the default config will still remove margin on `<body>`.
+
+To migrate, it's recommended that if you want an unstyled version of someting like a heading or a list, you use `role="list"` or `role="heading"` on a `<div>`. Or alternatively, you can change the `margins` option to `true`.
+
+#### Removed background reset
+
+Removed because it breaks `<dialog>` and because a white background is a good default for text inputs for most website designs.
+
+#### text-decoration reset only for links
+
+better default behaviour
+
+#### cursor:pointer on buttons
+
+better default behaviour
+
+## output of the default config
 
 ```css
 * {
-  margin: 0; /* mostly for <body> and block elements */
-  background: none; /* mostly for inputs */
-  text-decoration: none; /* mostly for links */
+  margin: 0; /* mostly for <body> and block elements (deprecated) */
+  background: none; /* mostly for inputs (deprecated) */
+  text-decoration: none; /* mostly for links (deprecated) */
   font: inherit; /* mostly for form controls and headings */
   color: inherit; /* mostly for links */
   border: solid 0; 
   border-color: inherit;
   min-width: 0; /* prevents odd behavior with flexbox */
-  min-height: 0 /* same */
+  min-height: 0; /* same */
 }
 
 img, video {
@@ -28,10 +48,9 @@ img, video {
 
 ## philosophy
 
-* very small
+* very small, very customizable, built for tailwind
 * doesn't reset styles you're probably going to overwrite anyway
 * relies on inherit to set defaults (like border color and box sizing)
-* tries to be unopinionated or at least allow choosing what to reset
 * fixes common annoyances
 
 ## usage
@@ -66,6 +85,9 @@ theme: {
 		pseudoElements: false,
 		placeholders: false,
 		images: true,
+		margins: true, // will be false in v1
+		body: false, // will be true in v1
+		buttons: false, // will be true in v1
 	}
 }
 ```
