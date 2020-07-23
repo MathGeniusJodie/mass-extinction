@@ -6,7 +6,7 @@ a minimal, customizable, CSS reset for tailwind
 
 <https://www.npmjs.com/package/mass-extinction>
 
-## Breaking Changes Planned for Version 1
+## breaking changes planned for version 1
 
 #### margin reset only for body
 
@@ -14,7 +14,7 @@ Removed because it breaks `<dialog>` and because margins are usually explicitly 
 
 To migrate, it's recommended that if you want an unstyled version of someting like a heading or a list, you use `role="list"` or `role="heading"` on a `<div>`. Or alternatively, you can change the `margins` option to `true`.
 
-#### Removed background reset
+#### removed background reset
 
 Removed because it breaks `<dialog>` and because a white background is a good default for text inputs for most website designs.
 
@@ -22,9 +22,9 @@ Removed because it breaks `<dialog>` and because a white background is a good de
 
 better default behaviour
 
-#### cursor:pointer on buttons
+#### box-sizing inherit by default
 
-better default behaviour
+Browser default styles set the box-sizing on some elements, leading to inconsistent and confusing behaviour.
 
 ## output of the default config
 
@@ -80,14 +80,14 @@ in your css
 theme: {
 	extinguish: {
 		legacy: true,
-		boxSizing: false,
+		boxSizing: false, // will be true in v1
 		layout: false,
 		pseudoElements: false,
 		placeholders: false,
 		images: true,
 		margins: true, // will be false in v1
 		body: false, // will be true in v1
-		buttons: false, // will be true in v1
+		forms: false,
 	}
 }
 ```
@@ -110,6 +110,7 @@ inherit box sizing (so you can use border-box if you prefer)
 
 avoids performance footguns (recommended)
 
+false by default because it's tricky to get consistent styling cross-browser as safari and edge don't support this feature yet
 
 #### pseudoElements:
 
@@ -122,3 +123,11 @@ unset placeholder opacity (mostly for firefox)
 #### images:
 
 unset image height (makes images keep aspect ratio when width is changed)
+
+#### forms:
+
+(subject to changes)
+
+removes margins on form controls, removes inconsistent styling in mobile safari
+
+this setting is false by default because if you want consistent styles for form controls it's recommended you use a more complete library like <https://tailwindcss-custom-forms.netlify.app/> that will make this reset redundant

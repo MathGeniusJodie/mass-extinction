@@ -27,6 +27,10 @@ module.exports = plugin(({ addBase, theme }) => {
 		minHeight: "0",// same
 	};
 
+	if (options.boxSizing) {
+		Object.assign(reset, { boxSizing: "inherit" });
+	}
+
 	if (options.margins) {
 		Object.assign(unset, options.legacy ? {
 			margin: "0", // mostly for <body> and block elements
@@ -35,34 +39,20 @@ module.exports = plugin(({ addBase, theme }) => {
 		});
 	}
 
-
-	if (options.boxSizing) {
-		Object.assign(reset, { boxSizing: "inherit" });
-	}
-
-
 	if (options.layout) {
 		Object.assign(reset, { contain: "layout" });
 	}
 
 	addBase({
 		"*": { ...unset, ...reset },
+		// will be enabled in v1
+		//"a": { textDecoration: options.legacy ? "none" : "unset" },
 	});
-/*
-	if (options.links) {
-		addBase({
-			"a": { textDecoration: options.legacy ? "none" : "unset" },
-		});
-	}*/
+
+
 	if (options.body && !options.margins) {
 		addBase({
 			"body": { margin: options.legacy ? "0" : "unset" },
-		});
-	}
-	
-	if (options.buttons) {
-		addBase({
-			"button": { cursor: "pointer" },
 		});
 	}
 
@@ -85,6 +75,21 @@ module.exports = plugin(({ addBase, theme }) => {
 			},
 		});
 	}
+
+	if (options.forms) {
+		addBase({
+			"input[type=email], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=url], textarea":{
+				borderRadius: "unset",
+				appearance: "unset",
+			},
+			"textarea, input":{
+				margin: options.legacy ? "0" : "unset"
+			}
+		});
+	}
+
+
+
 }, {
 	theme: {
 		extinguish: {
@@ -95,9 +100,8 @@ module.exports = plugin(({ addBase, theme }) => {
 			placeholders: false,
 			images: true,
 			margins: true, // will be false in v1
-			//links: true,
 			body: false, // will be true in v1
-			buttons: false, // will be true in v1
+			forms: false,
 		}
 	}
 });
