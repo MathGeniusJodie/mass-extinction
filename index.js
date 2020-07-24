@@ -21,16 +21,19 @@ module.exports = plugin(({ addBase, theme }) => {
 	});
 
 	var reset = {
+		//boxSizing: "inherit", // will be enabled in v1
 		border: "solid 0",
 		borderColor: "inherit",
 		minWidth: "0", // prevents odd behavior with flexbox
-		minHeight: "0",// same
+		minHeight: "0", // same
 	};
 
+	// will be removed in v1
 	if (options.boxSizing) {
 		Object.assign(reset, { boxSizing: "inherit" });
 	}
 
+	// will be removed in v1
 	if (options.margins) {
 		Object.assign(unset, options.legacy ? {
 			margin: "0", // mostly for <body> and block elements
@@ -47,14 +50,8 @@ module.exports = plugin(({ addBase, theme }) => {
 		"*": { ...unset, ...reset },
 		// will be enabled in v1
 		//"a": { textDecoration: options.legacy ? "none" : "unset" },
+		//"textarea, input, body":{ margin: options.legacy ? "0" : "unset" },
 	});
-
-
-	if (options.body && !options.margins) {
-		addBase({
-			"body": { margin: options.legacy ? "0" : "unset" },
-		});
-	}
 
 	if (options.pseudoElements) {
 		addBase({
@@ -81,26 +78,19 @@ module.exports = plugin(({ addBase, theme }) => {
 			"input[type=email], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=url], textarea":{
 				borderRadius: "unset",
 				appearance: "unset",
-			},
-			"textarea, input":{
-				margin: options.legacy ? "0" : "unset"
 			}
 		});
 	}
-
-
-
 }, {
 	theme: {
 		extinguish: {
 			legacy: true,
-			boxSizing: false,
+			boxSizing: false, // will be true in v1
 			layout: false,
 			pseudoElements: false,
 			placeholders: false,
 			images: true,
 			margins: true, // will be false in v1
-			body: false, // will be true in v1
 			forms: false,
 		}
 	}

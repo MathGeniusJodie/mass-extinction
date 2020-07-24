@@ -8,11 +8,11 @@ a minimal, customizable, CSS reset for tailwind
 
 ## breaking changes planned for version 1
 
-#### margin reset only for body
+#### margin reset only on some elements
 
-Removed because it breaks `<dialog>` and because margins are usually explicitly set on elements that have a default margin. Since almost every website removes margin on `<body>` and the tailwind class `m-0` is rarely used, the default config will still remove margin on `<body>`.
+Removed because it breaks `<dialog>` and because margins are usually explicitly set on elements that have a default margin. Since almost every website removes margin on `<body>` and the tailwind class `m-0` is rarely used, the default config will still remove margin on `<body>`. Margins are also removed on textareas and inputs to smooth over cross-browser differences.
 
-To migrate, it's recommended that if you want an unstyled version of someting like a heading or a list, you use `role="list"` or `role="heading"` on a `<div>`. Or alternatively, you can change the `margins` option to `true`.
+To migrate, it's recommended that if you want an unstyled version of someting like a heading or a list, you use `role="list"` or `role="heading"` on a `<div>`.
 
 #### removed background reset
 
@@ -86,7 +86,6 @@ theme: {
 		placeholders: false,
 		images: true,
 		margins: true, // will be false in v1
-		body: false, // will be true in v1
 		forms: false,
 	}
 }
@@ -128,6 +127,6 @@ unset image height (makes images keep aspect ratio when width is changed)
 
 (subject to changes)
 
-removes margins on form controls, removes inconsistent styling in mobile safari
+removes inconsistent styling in mobile safari
 
 this setting is false by default because if you want consistent styles for form controls it's recommended you use a more complete library like <https://tailwindcss-custom-forms.netlify.app/> that will make this reset redundant
