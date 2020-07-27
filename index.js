@@ -75,7 +75,7 @@ module.exports = plugin(({ addBase, theme }) => {
 
 	if (options.forms) {
 		addBase({
-			"input[type=email], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=url], textarea":{
+			"[type=email], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=url], textarea":{
 				borderRadius: "unset",
 				appearance: "unset",
 			}

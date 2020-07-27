@@ -130,3 +130,37 @@ unset image height (makes images keep aspect ratio when width is changed)
 removes inconsistent styling in mobile safari
 
 this setting is false by default because if you want consistent styles for form controls it's recommended you use a more complete library like <https://tailwindcss-custom-forms.netlify.app/> that will make this reset redundant
+
+## FAQ
+
+#### why is there no `main{display: block}` for ie?
+
+if you want to support ie, put role=main on a `<div>`
+
+#### why not reset styles for fieldset and legend?
+
+fieldsets should be avoided <https://bugs.chromium.org/p/chromium/issues/detail?id=375693> use `role=group` on a `<div>` instead
+
+#### why not add `display:none` to `<template>` elements for ie?
+
+if you want to support ie, use script tags instead
+
+#### why not reset `<ul>` and `ol` styles?
+
+you should use `role=list` on a `<div>` if you want an unstyled list
+
+#### why aren't pseudoelement resets enabled by default
+
+the tailwindcss workflow rarely uses pseudoelement
+
+#### why not set `cursor:pointer` on buttons?
+
+because that's not the semantics that operating systems use
+
+
+
+
+
+
+
+
