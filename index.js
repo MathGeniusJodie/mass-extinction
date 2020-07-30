@@ -4,12 +4,26 @@ module.exports = plugin(({ addBase, theme }) => {
 	const options = theme("extinguish", {});
 
 	var unset = options.legacy ? {
-		font: "inherit", // mostly for form controls and headings
-		color: "inherit", // mostly for links
+		margin: "0",
+		color: "inherit",
 	} : {
-		font: "unset", // mostly for form controls and headings
-		color: "unset", // mostly for links
+		margin: "unset",
+		color: "unset",
 	};
+
+	var reset = {
+		//boxSizing: "inherit", // will be enabled in v1
+		border: "solid 0",
+		borderColor: "inherit",
+		minWidth: "0", // prevents odd behavior with flexbox
+		minHeight: "0", // same
+	};
+
+	if(options.font){
+		Object.assign(unset,{
+			font: options.legacy ? "inherit" : "unset" + " /* font option */"
+		});
+	}
 
 	// will be removed in v1
 	Object.assign(unset, options.legacy ? {
@@ -20,54 +34,38 @@ module.exports = plugin(({ addBase, theme }) => {
 		textDecoration: "unset", // mostly for links (deprecated)
 	});
 
-	var reset = {
-		//boxSizing: "inherit", // will be enabled in v1
-		border: "solid 0",
-		borderColor: "inherit",
-		minWidth: "0", // prevents odd behavior with flexbox
-		minHeight: "0", // same
-	};
-
 	// will be removed in v1
 	if (options.boxSizing) {
 		Object.assign(reset, { boxSizing: "inherit" });
 	}
 
-	// will be removed in v1
-	if (options.margins) {
-		Object.assign(unset, options.legacy ? {
-			margin: "0", // mostly for <body> and block elements
-		} : {
-			margin: "unset", // mostly for <body> and block elements
-		});
-	}
-
 	if (options.layout) {
-		Object.assign(reset, { contain: "layout" });
+		Object.assign(reset, { contain: "layout /* layout option */" });
 	}
 
 	addBase({
 		"*": { ...unset, ...reset },
 		// will be enabled in v1
 		//"a": { textDecoration: options.legacy ? "none" : "unset" },
-		//"textarea, input, body":{ margin: options.legacy ? "0" : "unset" },
+		// will be enabled once <dialog> is supported in firefox and safari
+		//"dialog": { margin: "auto" },
 	});
 
 	if (options.pseudoElements) {
 		addBase({
-			"::before, ::after": reset,
+			"/* pseudoElements option */\n::before, ::after": reset,
 		});
 	}
 
 	if (options.placeholders) {
 		addBase({
-			"*::placeholder": { opacity: "unset" }, // for firefox
+			"/* placeholder option */\n*::placeholder": { opacity: "unset" }, // for firefox
 		});
 	}
 
 	if (options.images) {
 		addBase({
-			"img, video": {
+			"/* images option */\nimg, video": {
 				height: options.legacy ? "auto" : "unset",
 			},
 		});
@@ -75,7 +73,7 @@ module.exports = plugin(({ addBase, theme }) => {
 
 	if (options.forms) {
 		addBase({
-			"[type=email], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=url], textarea":{
+			"/* forms option */\n[type=email], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=url], textarea":{
 				borderRadius: "unset",
 				appearance: "unset",
 			}
@@ -86,11 +84,11 @@ module.exports = plugin(({ addBase, theme }) => {
 		extinguish: {
 			legacy: true,
 			boxSizing: false, // will be true in v1
-			layout: false,
+			layout: false, // add paint option in the future?
+			font: true,
 			pseudoElements: false,
 			placeholders: false,
 			images: true,
-			margins: true, // will be false in v1
 			forms: false,
 		}
 	}

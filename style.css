@@ -1,15 +1,39 @@
 * {
-  font: inherit;
-  color: inherit;
-  background: none;
-  text-decoration: none;
-  margin: 0;
+  margin: unset;
+  color: unset;
+  font: unset /* font option */;
+  background: unset;
+  text-decoration: unset;
   border: solid 0;
   border-color: inherit;
   min-width: 0;
-  min-height: 0
+  min-height: 0;
+  box-sizing: inherit;
+  contain: layout /* layout option */
 }
 
+/* pseudoElements option */
+::before, ::after {
+  border: solid 0;
+  border-color: inherit;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: inherit;
+  contain: layout /* layout option */
+}
+
+/* placeholder option */
+*::placeholder {
+  opacity: unset
+}
+
+/* images option */
 img, video {
-  height: auto
+  height: unset
+}
+
+/* forms option */
+[type=email], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=url], textarea {
+  border-radius: unset;
+  appearance: unset
 }

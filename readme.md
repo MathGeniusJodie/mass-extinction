@@ -10,12 +10,6 @@ a minimal, customizable, CSS reset for tailwind
 
 ## breaking changes planned for version 1
 
-#### margin reset only on some elements
-
-Global reset breaks `<dialog>` and violates philosophy number 2. 
-
-Margins will be reset on textareas and inputs to smooth over cross-browser differences.
-
 #### removed background reset
 
 Global reset breaks `<dialog>` and violates philosophy number 2.
@@ -64,10 +58,10 @@ theme: {
 		legacy: true,
 		boxSizing: false, // will be true in v1
 		layout: false,
+		font: true,
 		pseudoElements: false,
 		placeholders: false,
 		images: true,
-		margins: true, // will be false in v1
 		forms: false,
 	}
 }
@@ -92,6 +86,12 @@ inherit box sizing (so you can use border-box if you prefer)
 avoids performance footguns (recommended)
 
 false by default because it's tricky to get consistent styling cross-browser as safari and edge don't support this feature yet
+
+#### font
+
+makes all elements inherit font
+
+true by default to match [normalize.css](https://necolas.github.io/normalize.css/) but for content-focused websites, you probably don't want form elements to inherit font
 
 #### pseudoElements:
 
