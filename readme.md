@@ -22,12 +22,16 @@ better default behaviour
 
 Browser default styles set the box-sizing on some elements, leading to inconsistent and confusing behaviour.
 
+#### border-color inherit no longer the default
+
+`border-color: currentColor` is a good default for most website designs (set implicitly by `border: solid 0`)
+
 ## philosophy
 
-* very small, very customizable, built for tailwind
-* doesn't reset styles you're going to overwrite anyway
-* relies on inherit to set defaults (like border color and box sizing)
-* fixes common annoyances
+-   very small, very customizable, built for tailwind
+-   doesn't reset styles you're going to overwrite anyway
+-   relies on inherit to set defaults (like border color and box sizing)
+-   fixes common annoyances
 
 ## usage
 
@@ -35,9 +39,7 @@ in tailwind.config.js
 
 ```js
 module.exports = {
-	plugins: [
-		require('mass-extinction'),
-	],
+	plugins: [require("mass-extinction")],
 	corePlugins: {
 		preflight: false,
 	},
@@ -58,6 +60,7 @@ theme: {
 		legacy: true,
 		boxSizing: false, // will be true in v1
 		layout: false,
+		borderColor: true, // will be false in v1
 		font: true,
 		pseudoElements: false,
 		placeholders: false,
@@ -78,14 +81,20 @@ inherit box sizing (so you can use border-box if you prefer)
 #### layout:
 
 ```css
-*{
-	contain: layout
+* {
+	contain: layout;
 }
 ```
 
 avoids performance footguns (recommended)
 
 false by default because it's tricky to get consistent styling cross-browser as safari and edge don't support this feature yet
+
+#### borderColor
+
+`border-color: inherit`, allows setting a default border color like in [preflight](https://tailwindcss.com/docs/preflight/)
+
+will be false by default in v1 since the default (border color == currentColor) is a good default for most website designs
 
 #### font
 
@@ -136,11 +145,3 @@ the tailwindcss workflow rarely uses pseudoelement
 #### why not set `cursor:pointer` on buttons?
 
 because that's not the semantics that operating systems use
-
-
-
-
-
-
-
-
