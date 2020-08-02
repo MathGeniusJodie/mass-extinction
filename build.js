@@ -6,7 +6,7 @@ const fullConfig = require("postcss")([
 	require("tailwindcss")("./full.config.js"),
 ]);
 
-var compile = async () => {
+(async () => {
 	writeFile(
 		"./default.css",
 		(await defaultConfig.process("@tailwind base;", { from: undefined })).css
@@ -15,6 +15,4 @@ var compile = async () => {
 		"./full.css",
 		(await fullConfig.process("@tailwind base;", { from: undefined })).css
 	);
-};
-
-compile();
+})();
