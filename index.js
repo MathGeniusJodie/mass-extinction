@@ -107,7 +107,7 @@ module.exports = plugin(
 
 		if (options.legacy && !options.font) {
 			addBase({
-				"pre, code": {
+				"pre, code, samp": {
 					fontSize: "inherit",
 				},
 			});
