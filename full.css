@@ -1,20 +1,22 @@
 /* unset */
 * {
   margin: unset;
-  color: unset;
   font: unset;
-  background: unset;
-  text-decoration: unset
+  color: unset
 }
 
 /* reset */
 *, ::before, ::after {
+  box-sizing: inherit;
   border: solid 0;
+  border-color: inherit;
   min-width: 0;
   min-height: 0;
-  contain: layout;
-  border-color: inherit;
-  box-sizing: inherit
+  contain: layout
+}
+
+a {
+  text-decoration: unset
 }
 
 /* placeholder option */

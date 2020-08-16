@@ -1,6 +1,6 @@
 {
 	"name": "mass-extinction",
-	"version": "0.6.0",
+	"version": "1.0.0",
 	"description": "minimal, customizable, CSS reset for tailwind",
 	"repository": "https://github.com/MathGeniusJodie/mass-extinction",
 	"main": "index.js",
@@ -12,7 +12,7 @@
 	],
 	"license": "WTFPL",
 	"devDependencies": {
-		"tailwindcss": "^1.6.0",
+		"tailwindcss": "^1.6.2",
 		"tailwindcss-rtl": "^0.4.0"
 	}
 }

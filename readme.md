@@ -8,24 +8,6 @@ a minimal, customizable, CSS reset for tailwind
 
 <https://www.npmjs.com/package/mass-extinction>
 
-## breaking changes planned for version 1
-
-#### removed background reset
-
-Global reset breaks `<dialog>` and violates philosophy number 2.
-
-#### text-decoration reset only for links
-
-better default behaviour
-
-#### box-sizing inherit by default
-
-Browser default styles set the box-sizing on some elements, leading to inconsistent and confusing behaviour.
-
-#### border-color inherit no longer the default
-
-`border-color: currentColor` is a good default for most website designs (set implicitly by `border: solid 0`)
-
 ## philosophy
 
 -   very small, very customizable, built for tailwind
@@ -58,9 +40,8 @@ in your css
 theme: {
 	extinguish: {
 		legacy: true,
-		boxSizing: false, // will be true in v1
 		layout: false,
-		borderColor: true, // will be false in v1
+		borderColor: false,
 		font: true,
 		pseudoElements: false,
 		placeholders: false,
@@ -72,11 +53,7 @@ theme: {
 
 #### legacy:
 
-old browser support (currently for browsers that don't support "unset")
-
-#### boxSizing:
-
-inherit box sizing (so you can use border-box if you prefer)
+old browser support (currently for ie)
 
 #### layout:
 
@@ -93,8 +70,6 @@ false by default because it's tricky to get consistent styling cross-browser as 
 #### borderColor
 
 `border-color: inherit`, allows setting a default border color like in [preflight](https://tailwindcss.com/docs/preflight/)
-
-will be false by default in v1 since the default (border color == currentColor) is a good default for most website designs
 
 #### font
 

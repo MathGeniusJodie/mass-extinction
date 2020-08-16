@@ -53,34 +53,18 @@ module.exports = plugin(
 
 		const unset = polyfillUnset({
 			margin: "unset",
-			color: "unset", // affects: a, mark, input, textarea, keygen, select, button
-			...(options.font && { font: "unset" }),
+			// color affects: a, mark, input, textarea, keygen, select, button
+			...(options.font && { font: "unset", color: "unset" }),
 		});
 
 		const reset = {
-			//boxSizing: "inherit", // will be enabled in v1
+			boxSizing: "inherit",
 			border: "solid 0",
+			...(options.borderColor && { borderColor: "inherit" }),
 			minWidth: "0", // prevents odd behavior with flexbox
 			minHeight: "0", // same
 			...(options.layout && { contain: "layout" }),
-			...(options.borderColor && { borderColor: "inherit" }),
 		};
-
-		// will be removed in v1
-		Object.assign(
-			unset,
-			polyfillUnset({
-				background: "unset", // mostly for inputs (deprecated)
-				textDecoration: "unset", // mostly for links (deprecated)
-			})
-		);
-
-		// will be removed in v1
-		if (options.boxSizing) {
-			Object.assign(reset, {
-				boxSizing: "inherit",
-			});
-		}
 
 		if (options.pseudoElements) {
 			addBase({
@@ -97,21 +81,15 @@ module.exports = plugin(
 		}
 
 		addBase({
-			// will be enabled in v1
-			//"a": polyfillUnset({ textDecoration: "unset" }),
+			a: polyfillUnset({
+				textDecoration: "unset",
+				...(!options.font && { color: "unset" }),
+			}),
 			// will be enabled once <dialog> is supported in firefox and safari
 			//"dialog": { margin: "auto" },
 			// will be enabled after purgecss testing
 			//"pre": { tabSize: "4" },
 		});
-
-		if (options.legacy && !options.font) {
-			addBase({
-				"pre, code, samp": {
-					fontSize: "inherit",
-				},
-			});
-		}
 
 		if (options.placeholders) {
 			addBase({
@@ -137,14 +115,21 @@ module.exports = plugin(
 				},
 			});
 		}
+
+		if (options.legacy && !options.font) {
+			addBase({
+				"/* normalize styles that are different in ie  */\npre, code, samp": {
+					fontSize: "inherit",
+				},
+			});
+		}
 	},
 	{
 		theme: {
 			extinguish: {
 				legacy: true,
-				boxSizing: false, // will be removed in v1
-				layout: false, // add paint option in the future?
-				borderColor: true, // will be false in v1
+				layout: false,
+				borderColor: false,
 				font: true,
 				pseudoElements: false,
 				placeholders: false,
