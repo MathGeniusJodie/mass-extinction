@@ -7,6 +7,7 @@ module.exports = {
 	theme: {
 		extinguish: {
 			legacy: false,
+			boxSizing: "unset",
 			layout: true,
 			borderColor: true,
 			font: true,

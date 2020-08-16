@@ -10,7 +10,7 @@ a minimal, customizable, CSS reset for tailwind
 
 ## philosophy
 
--   very small, very customizable, built for tailwind
+-   very small, customizable, built for tailwind
 -   doesn't reset styles you're going to overwrite anyway
 -   relies on inherit to set defaults (like border color and box sizing)
 -   fixes common annoyances
@@ -40,6 +40,7 @@ in your css
 theme: {
 	extinguish: {
 		legacy: true,
+		boxSizing: false, // "unset" "content-box" "border-box" "inherit"
 		layout: false,
 		borderColor: false,
 		font: true,

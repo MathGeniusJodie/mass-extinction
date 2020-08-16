@@ -7,7 +7,7 @@
 
 /* reset */
 *, ::before, ::after {
-  box-sizing: inherit;
+  box-sizing: unset;
   border: solid 0;
   border-color: inherit;
   min-width: 0;

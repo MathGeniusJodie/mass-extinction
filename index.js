@@ -58,7 +58,7 @@ module.exports = plugin(
 		});
 
 		const reset = {
-			boxSizing: "inherit",
+			...(options.boxSizing && { boxSizing: options.boxSizing }),
 			border: "solid 0",
 			...(options.borderColor && { borderColor: "inherit" }),
 			minWidth: "0", // prevents odd behavior with flexbox
@@ -128,6 +128,7 @@ module.exports = plugin(
 		theme: {
 			extinguish: {
 				legacy: true,
+				boxSizing: false,
 				layout: false,
 				borderColor: false,
 				font: true,
