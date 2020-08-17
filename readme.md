@@ -10,10 +10,12 @@ a minimal, customizable, CSS reset for tailwind
 
 ## philosophy
 
--   very small, customizable, built for tailwind
--   doesn't reset styles you're going to overwrite anyway
--   relies on inherit to set defaults (like border color and box sizing)
--   fixes common annoyances
+-   small code size is a priority
+-   does more than preflight by fixing some common annoyances
+-   lets you pick the resets you want/need if you want to deviate from the sensible defaults
+-   is made specifically for a tailwind workflow
+-   doesn't reset styles you're going to overwrite anyway, follows [normalize](https://necolas.github.io/normalize.css/)'s approach of keeping default browser styles in cases where they do no harm
+-   relies on inherit to set defaults (like border color) when possible, allowing the use of utility classes
 
 ## usage
 
@@ -48,13 +50,14 @@ theme: {
 		placeholders: false,
 		images: true,
 		forms: false,
+		lists: false,
 	}
 }
 ```
 
 #### legacy:
 
-old browser support (currently for ie)
+old browser support (currently only for ie11), doesn't use the [unset keyword](https://developer.mozilla.org/en-US/docs/Web/CSS/unset) and changes default styles that are different from other browsers (currently `<pre>`, `<code>` and `<samp>` not inheriting `font-size`)
 
 #### layout:
 
@@ -82,6 +85,10 @@ true by default to match [normalize.css](https://necolas.github.io/normalize.css
 
 add reset styles to `::before` and `::after`
 
+false by default since the tailwindcss workflow rarely uses pseudoelements
+
+pseudoelements should be avoided in general since content belongs in html and there doesn't exist a way to hide purely presentational pseudoelement content from screen readers
+
 #### placeholders:
 
 unset placeholder opacity (mostly for firefox)
@@ -96,6 +103,12 @@ removes inconsistent styling in mobile safari
 
 this setting is false by default because if you want consistent styles for form controls it's recommended you use a more complete library like <https://tailwindcss-custom-forms.netlify.app/> that will make this reset redundant
 
+#### lists:
+
+unstyle `<ul>` and `<ol>` elements
+
+this setting is false by default because in most cases you can just use `role=list` on a `<div>` if you want an unstyled list
+
 ## FAQ
 
 #### why is there no `main{display: block}` for ie?
@@ -109,14 +122,6 @@ fieldsets should be avoided <https://bugs.chromium.org/p/chromium/issues/detail?
 #### why not add `display:none` to `<template>` elements for ie?
 
 if you want to support ie, use script tags instead
-
-#### why not reset `<ul>` and `ol` styles?
-
-you should use `role=list` on a `<div>` if you want an unstyled list
-
-#### why aren't pseudoelement resets enabled by default
-
-the tailwindcss workflow rarely uses pseudoelement
 
 #### why not set `cursor:pointer` on buttons?
 
