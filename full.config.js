@@ -15,6 +15,7 @@ module.exports = {
 			placeholders: true,
 			images: true,
 			forms: true,
+			lists: true,
 		},
 	},
 };

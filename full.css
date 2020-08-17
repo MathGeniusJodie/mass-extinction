@@ -34,3 +34,9 @@ img, video {
   border-radius: unset;
   appearance: unset
 }
+
+/* lists reset  */
+ul,ol {
+  padding: unset;
+  list-style: unset
+}

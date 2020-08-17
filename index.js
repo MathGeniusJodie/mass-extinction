@@ -33,6 +33,8 @@ const unsetValues = {
 	height: "auto",
 	margin: "0",
 	textDecoration: "none",
+	listStyle: "none",
+	padding: "0",
 };
 
 const cloneObject = (object) => Object.assign({}, object);
@@ -123,6 +125,15 @@ module.exports = plugin(
 				},
 			});
 		}
+
+		if (options.lists) {
+			addBase({
+				"/* lists reset  */\nul,ol": polyfillUnset({
+					padding: "unset",
+					listStyle: "unset",
+				}),
+			});
+		}
 	},
 	{
 		theme: {
@@ -136,6 +147,7 @@ module.exports = plugin(
 				placeholders: false,
 				images: true,
 				forms: false,
+				lists: false,
 			},
 		},
 	}
