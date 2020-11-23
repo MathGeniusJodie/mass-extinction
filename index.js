@@ -89,7 +89,7 @@ module.exports = plugin(
 			}),
 			// will be enabled once <dialog> is supported in firefox and safari
 			//"dialog": { margin: "auto" },
-			// will be enabled after purgecss testing
+			// will be enabled after purgecss testing (modern-normalize compatibility)
 			//"pre": { tabSize: "4" },
 		});
 
