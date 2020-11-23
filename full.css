@@ -36,7 +36,7 @@ img, video {
 }
 
 /* lists reset  */
-ul,ol {
+ul, ol {
   padding: unset;
-  list-style: unset
+  list-style: none
 }

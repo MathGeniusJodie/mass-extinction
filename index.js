@@ -128,9 +128,9 @@ module.exports = plugin(
 
 		if (options.lists) {
 			addBase({
-				"/* lists reset  */\nul,ol": polyfillUnset({
+				"/* lists reset  */\nul, ol": polyfillUnset({
 					padding: "unset",
-					listStyle: "unset",
+					listStyle: "none",
 				}),
 			});
 		}
