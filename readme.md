@@ -69,7 +69,7 @@ old browser support (currently only for ie11), doesn't use the [unset keyword](h
 
 avoids performance footguns (recommended)
 
-false by default because it's tricky to get consistent styling cross-browser as safari and edge don't support this feature yet
+false by default because it's tricky to get consistent styling cross-browser as safari and edge don't support this feature yet, this also breaks the [tailwind typography plugin](https://tailwindcss.com/docs/typography-plugin)
 
 #### borderColor
 
@@ -89,6 +89,8 @@ false by default since the tailwindcss workflow rarely uses pseudoelements
 
 pseudoelements should be avoided in general since content belongs in html and there doesn't exist a way to hide purely presentational pseudoelement content from screen readers
 
+must be enabled for the [tailwind typography plugin](https://tailwindcss.com/docs/typography-plugin) to work
+
 #### placeholders:
 
 unset placeholder opacity (mostly for firefox)
@@ -101,7 +103,7 @@ unset image height (makes images keep aspect ratio)
 
 removes inconsistent styling in mobile safari
 
-this setting is false by default because if you want consistent styles for form controls it's recommended you use a more complete library like <https://tailwindcss-custom-forms.netlify.app/> that will make this reset redundant
+this setting is false by default because if you want consistent styles for form controls it's recommended you use a more complete library like <https://github.com/tailwindlabs/tailwindcss-forms> that will make this reset redundant
 
 #### lists:
 
