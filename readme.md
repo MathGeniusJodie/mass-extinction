@@ -118,13 +118,13 @@ function that returns css rules
 
 first argument is the element name as a string
 
-second argument is an object containing the properties of the element according to the html spec (currently just contentModel and display)
+second argument is an object containing the properties of the element according to the html spec (currently just contentModel and display) see the `spec.js` file for more details
 
 example:
 
 ```js
 // make flex the default display property for elements that accept flow content
-(element, spec) {
+(element, spec) => {
 	const rules = {};
 	if (
 		spec.contentModel == "flow" && spec.display == "block"
