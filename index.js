@@ -1,5 +1,7 @@
 const plugin = require("tailwindcss/plugin");
-
+const spec = require("./spec.js");
+const postcss = require("postcss-js");
+const mergeRules = require("postcss-merge-rules");
 // list of unset values for ie support (in progress)
 const unsetValues = {
 	animation: "none",
@@ -42,6 +44,16 @@ const cloneObject = (object) => Object.assign({}, object);
 module.exports = plugin(
 	({ addBase, theme }) => {
 		const options = theme("extinguish", {});
+
+		if (options.forElements) {
+			const rules = {};
+			Object.entries(spec).forEach(([element, spec]) => {
+				Object.assign(rules, options.forElements(element, spec));
+			});
+
+			addBase(postcss.sync([mergeRules])(rules));
+			//addBase(rules);
+		}
 
 		const polyfillUnset = options.legacy
 			? (object) => {

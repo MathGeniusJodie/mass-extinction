@@ -51,6 +51,7 @@ theme: {
 		images: true,
 		forms: false,
 		lists: false,
+		forElements(element,spec){}
 	}
 }
 ```
@@ -110,6 +111,33 @@ this setting is false by default because if you want consistent styles for form 
 unstyle `<ul>` and `<ol>` elements
 
 this setting is false by default because in most cases you can just use `role=list` on a `<div>` if you want an unstyled list
+
+#### forElements:
+
+function that returns css rules
+
+first argument is the element name as a string
+
+second argument is an object containing the properties of the element according to the html spec (currently just contentModel and display)
+
+example:
+
+```js
+// make flex the default display property for elements that accept flow content
+(element, spec) {
+	const rules = {};
+	if (
+		spec.contentModel == "flow" && spec.display == "block"
+	) {
+		rules[element] = {
+			display: "flex",
+			flexDirection: "column",
+		};
+	}
+	return rules;
+}
+
+```
 
 ## FAQ
 

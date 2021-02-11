@@ -16,6 +16,19 @@ module.exports = {
 			images: true,
 			forms: true,
 			lists: true,
+			forElements(element, spec) {
+				const rules = {};
+				if (
+					element == "a" ||
+					(spec.contentModel == "flow" && spec.display == "block")
+				) {
+					rules[element] = {
+						display: "flex",
+						flexDirection: "column",
+					};
+				}
+				return rules;
+			},
 		},
 	},
 };
